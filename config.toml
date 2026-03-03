@@ -1,0 +1,41 @@
+baseURL = "https://northharbor.dev"
+languageCode = "en-us"
+title = "NorthHarbor"
+theme = ""
+
+[params]
+  tagline = "Coordination infrastructure for AI-assisted software development."
+  description = "NorthHarbor builds the coordination layer that makes multi-agent software development reliable, observable, and human-controlled."
+  author = "Bob Hong"
+  githubOrg = "https://github.com/northharbor-dev"
+  email = "hello@northharbor.dev"
+
+[menu]
+  [[menu.main]]
+    name = "Products"
+    url = "/products/"
+    weight = 10
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 20
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 30
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 40
+
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  tag = "tags"
+  series = "series"

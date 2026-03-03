@@ -1,0 +1,12 @@
+{
+  "name": "northharbor-website",
+  "version": "0.1.0",
+  "description": "northharbor.dev — cross-posting scripts",
+  "type": "module",
+  "scripts": {
+    "publish": "node scripts/publish.js"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  }
+}

@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="container">
+  <article class="article">
+    <header class="article__header">
+      <h1 class="article__title">{{ .Title }}</h1>
+      <div class="article__meta">
+        <span>{{ .Date.Format "January 2, 2006" }}</span>
+        <span>By {{ .Site.Params.author }}</span>
+        {{ with .Params.tags }}
+        <div class="blog-card__tags" style="margin: 0;">
+          {{ range . }}<span class="blog-card__tag">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </header>
+    <div class="article__body">
+      {{ .Content }}
+    </div>
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+      <a href="/blog/" style="color: var(--sage-500); font-size: .9rem;">← Back to all posts</a>
+    </div>
+  </article>
+</div>
+{{ end }}

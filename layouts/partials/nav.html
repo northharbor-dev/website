@@ -1,0 +1,14 @@
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">
+      <img src="/images/org-avatar.png" alt="NorthHarbor logo">
+      NorthHarbor
+    </a>
+    <ul class="nav__links">
+      {{ range .Site.Menus.main }}
+      <li><a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+    <a href="{{ .Site.Params.githubOrg }}" class="btn btn--outline-dark" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</nav>

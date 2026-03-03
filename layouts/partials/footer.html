@@ -1,0 +1,39 @@
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <div class="footer__brand">
+        <img src="/images/org-avatar.png" alt="NorthHarbor">
+        NorthHarbor
+      </div>
+      <p class="footer__tagline">{{ .Site.Params.tagline }}</p>
+    </div>
+    <nav class="footer__nav">
+      <div class="footer__nav-group">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="/products/">Products</a></li>
+          <li><a href="https://github.com/northharbor-dev/waypoint" target="_blank" rel="noopener">Waypoint</a></li>
+          <li><a href="https://sage.northharbor.dev" target="_blank" rel="noopener">Sage</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav-group">
+        <h4>Content</h4>
+        <ul>
+          <li><a href="/blog/">Rising Tides Blog</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav-group">
+        <h4>Open Source</h4>
+        <ul>
+          <li><a href="{{ .Site.Params.githubOrg }}" target="_blank" rel="noopener">GitHub Org</a></li>
+          <li><a href="https://github.com/northharbor-dev/waypoint" target="_blank" rel="noopener">Waypoint CLI</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <p>&copy; {{ now.Year }} NorthHarbor Development. All rights reserved.</p>
+  </div>
+</footer>
