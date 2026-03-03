@@ -1,7 +1,6 @@
 baseURL = "https://northharbor.dev"
 languageCode = "en-us"
 title = "NorthHarbor"
-theme = ""
 
 [params]
   tagline = "Coordination infrastructure for AI-assisted software development."
