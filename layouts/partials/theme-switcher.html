@@ -1,0 +1,145 @@
+<div class="theme-switcher" id="theme-switcher" aria-label="Theme and text size selector">
+  <div class="theme-switcher__panel" id="theme-panel" role="listbox" aria-label="Choose a color palette">
+    <button class="theme-switcher__option" role="option" data-theme="harbor">
+      <span class="theme-switcher__swatch" style="background:#458582"></span>
+      Harbor <span style="color:#aaa;font-weight:400;font-size:.75rem">(default)</span>
+    </button>
+    <button class="theme-switcher__option" role="option" data-theme="deep-water">
+      <span class="theme-switcher__swatch" style="background:#3d7fc1"></span>
+      Deep Water
+    </button>
+    <button class="theme-switcher__option" role="option" data-theme="phosphor">
+      <span class="theme-switcher__swatch" style="background:#00b8a3"></span>
+      Phosphor
+    </button>
+    <button class="theme-switcher__option" role="option" data-theme="meridian">
+      <span class="theme-switcher__swatch" style="background:#2d7a74"></span>
+      Meridian
+    </button>
+    <button class="theme-switcher__option" role="option" data-theme="slate-signal">
+      <span class="theme-switcher__swatch" style="background:#0fa86e"></span>
+      Slate &amp; Signal
+    </button>
+    <button class="theme-switcher__option" role="option" data-theme="harbor-dusk">
+      <span class="theme-switcher__swatch" style="background:#4a7fa5"></span>
+      Harbor Dusk
+    </button>
+
+    <div class="theme-switcher__divider"></div>
+    <div class="theme-switcher__section-label">Text size</div>
+    <div class="text-size-options" role="group" aria-label="Text size">
+      <button class="text-size-btn" data-size="compact" aria-pressed="false" title="Compact">
+        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
+        <span class="text-size-btn__label">Compact</span>
+      </button>
+      <button class="text-size-btn" data-size="medium" aria-pressed="false" title="Medium">
+        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
+        <span class="text-size-btn__label">Medium</span>
+      </button>
+      <button class="text-size-btn" data-size="large" aria-pressed="false" title="Large">
+        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
+        <span class="text-size-btn__label">Large</span>
+      </button>
+    </div>
+  </div>
+  <button class="theme-switcher__toggle" id="theme-toggle" aria-haspopup="listbox" aria-expanded="false">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <circle cx="8" cy="8" r="3.5"/>
+      <path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    Theme
+  </button>
+</div>
+
+<script>
+(function () {
+  var THEME_KEY = 'nh-theme';
+  var SIZE_KEY  = 'nh-text-size';
+  var DEFAULT_THEME = 'harbor';
+
+  var root    = document.documentElement;
+  var panel   = document.getElementById('theme-panel');
+  var toggle  = document.getElementById('theme-toggle');
+  var themeOptions = panel.querySelectorAll('.theme-switcher__option');
+  var sizeBtns     = panel.querySelectorAll('.text-size-btn');
+
+  /* ---- Theme ---- */
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    try { localStorage.setItem(THEME_KEY, theme); } catch(e) {}
+    themeOptions.forEach(function(btn) {
+      var active = btn.getAttribute('data-theme') === theme;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+
+  var savedTheme;
+  try { savedTheme = localStorage.getItem(THEME_KEY); } catch(e) {}
+  applyTheme(savedTheme || DEFAULT_THEME);
+
+  themeOptions.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      applyTheme(btn.getAttribute('data-theme'));
+      closePanel();
+    });
+  });
+
+  /* ---- Text size ---- */
+  function applyTextSize(size) {
+    if (size) {
+      root.setAttribute('data-text-size', size);
+    } else {
+      root.removeAttribute('data-text-size');
+    }
+    try {
+      if (size) { localStorage.setItem(SIZE_KEY, size); }
+      else { localStorage.removeItem(SIZE_KEY); }
+    } catch(e) {}
+    sizeBtns.forEach(function(btn) {
+      var active = btn.getAttribute('data-size') === size;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  var savedSize;
+  try { savedSize = localStorage.getItem(SIZE_KEY); } catch(e) {}
+  applyTextSize(savedSize || null);
+
+  sizeBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var current = root.getAttribute('data-text-size');
+      var next = btn.getAttribute('data-size');
+      // Clicking the active size deselects it (back to browser default)
+      applyTextSize(current === next ? null : next);
+    });
+  });
+
+  /* ---- Panel open/close ---- */
+  function openPanel() {
+    panel.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+
+  function closePanel() {
+    panel.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    panel.classList.contains('is-open') ? closePanel() : openPanel();
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!document.getElementById('theme-switcher').contains(e.target)) {
+      closePanel();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePanel();
+  });
+})();
+</script>
