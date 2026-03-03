@@ -1281,6 +1281,17 @@ pre code { background: none; color: inherit; padding: 0; }
 
 @media (max-width: 768px) {
   .theme-switcher { bottom: 1rem; right: 1rem; }
+
+  .theme-switcher__panel {
+    max-height: calc(100dvh - 5rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .text-size-btn {
+    padding: .6rem .3rem;
+    min-height: 3rem;
+  }
 }
 
 /* =============================================================

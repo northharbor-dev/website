@@ -1,5 +1,24 @@
 <div class="theme-switcher" id="theme-switcher" aria-label="Theme and text size selector">
   <div class="theme-switcher__panel" id="theme-panel" role="listbox" aria-label="Choose a color palette">
+    <div class="theme-switcher__section-label">Text size</div>
+    <div class="text-size-options" role="group" aria-label="Text size">
+      <button class="text-size-btn" data-size="compact" aria-pressed="false" title="Compact">
+        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
+        <span class="text-size-btn__label">Compact</span>
+      </button>
+      <button class="text-size-btn" data-size="medium" aria-pressed="false" title="Medium">
+        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
+        <span class="text-size-btn__label">Medium</span>
+      </button>
+      <button class="text-size-btn" data-size="large" aria-pressed="false" title="Large">
+        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
+        <span class="text-size-btn__label">Large</span>
+      </button>
+    </div>
+
+    <div class="theme-switcher__divider"></div>
+    <div class="theme-switcher__section-label">Color theme</div>
+
     <button class="theme-switcher__option" role="option" data-theme="harbor">
       <span class="theme-switcher__swatch" style="background:#458582"></span>
       Harbor <span style="color:#aaa;font-weight:400;font-size:.75rem">(default)</span>
@@ -24,23 +43,6 @@
       <span class="theme-switcher__swatch" style="background:#4a7fa5"></span>
       Harbor Dusk
     </button>
-
-    <div class="theme-switcher__divider"></div>
-    <div class="theme-switcher__section-label">Text size</div>
-    <div class="text-size-options" role="group" aria-label="Text size">
-      <button class="text-size-btn" data-size="compact" aria-pressed="false" title="Compact">
-        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
-        <span class="text-size-btn__label">Compact</span>
-      </button>
-      <button class="text-size-btn" data-size="medium" aria-pressed="false" title="Medium">
-        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
-        <span class="text-size-btn__label">Medium</span>
-      </button>
-      <button class="text-size-btn" data-size="large" aria-pressed="false" title="Large">
-        <span class="text-size-btn__preview" aria-hidden="true">Aa</span>
-        <span class="text-size-btn__label">Large</span>
-      </button>
-    </div>
   </div>
   <button class="theme-switcher__toggle" id="theme-toggle" aria-haspopup="listbox" aria-expanded="false">
     <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -108,7 +110,8 @@
   applyTextSize(savedSize || null);
 
   sizeBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
       var current = root.getAttribute('data-text-size');
       var next = btn.getAttribute('data-size');
       // Clicking the active size deselects it (back to browser default)

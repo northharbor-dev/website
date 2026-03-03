@@ -9,3 +9,15 @@
   from = "/rising-tides"
   to = "/blog"
   status = 301
+
+# Fingerprinted CSS/JS — immutable, cache for 1 year
+[[headers]]
+  for = "/css/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML — always revalidate so users get fresh content
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
